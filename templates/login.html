@@ -11,13 +11,155 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/css/adminlte.min.css">
+    <style>
+        body {
+            background: linear-gradient(45deg, #1a237e, #0d47a1);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .login-box {
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .login-box:hover {
+            transform: scale(1.02);
+        }
+
+        .login-logo {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .login-logo a {
+            color: #fff;
+            font-size: 35px;
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .login-logo a:hover {
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            transform: scale(1.05);
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .login-card-body {
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #1a237e;
+            box-shadow: 0 0 0 0.2rem rgba(26, 35, 126, 0.25);
+        }
+
+        .input-group-text {
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            background-color: #f8f9fa;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #1a237e, #0d47a1);
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(13, 71, 161, 0.4);
+        }
+
+        .alert {
+            border-radius: 10px;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Floating animation for background */
+        .floating-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .floating-bg div {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        .floating-bg div:nth-child(1) { left: 10%; animation-duration: 20s; }
+        .floating-bg div:nth-child(2) { left: 30%; animation-duration: 25s; }
+        .floating-bg div:nth-child(3) { left: 50%; animation-duration: 15s; }
+        .floating-bg div:nth-child(4) { left: 70%; animation-duration: 22s; }
+        .floating-bg div:nth-child(5) { left: 90%; animation-duration: 18s; }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        }
+    </style>
 </head>
-<body class="hold-transition login-page">
+<body>
+    <!-- Floating background elements -->
+    <div class="floating-bg">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
     <div class="login-box">
         <div class="login-logo">
             <a href="#"><b>CMS</b> Admin</a>
         </div>
-        <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
@@ -57,10 +199,8 @@
                     </div>
                 </form>
             </div>
-            <!-- /.login-card-body -->
         </div>
     </div>
-    <!-- /.login-box -->
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -68,5 +208,33 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2.0/dist/js/adminlte.min.js"></script>
+    <script>
+        // Add mouse move effect
+        document.addEventListener('mousemove', (e) => {
+            const loginBox = document.querySelector('.login-box');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            loginBox.style.transform = `perspective(1000px) rotateY(${(x - 0.5) * 5}deg) rotateX(${(y - 0.5) * -5}deg)`;
+        });
+
+        // Reset transform when mouse leaves
+        document.addEventListener('mouseleave', () => {
+            const loginBox = document.querySelector('.login-box');
+            loginBox.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+        });
+
+        // Add input focus effects
+        const inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.style.transform = 'scale(1.02)';
+            });
+            
+            input.addEventListener('blur', () => {
+                input.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
 </body>
 </html> 
