@@ -27,7 +27,7 @@
                 {{ post.content|truncate(200) }}
             </div>
             <div class="card-footer">
-                <a href="#" class="btn btn-primary btn-sm">Read More</a>
+                <a href="{{ url_for('public_view_post', post_id=post.id) }}" class="btn btn-primary btn-sm">Read More</a>
             </div>
         </div>
     </div>

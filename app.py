@@ -180,6 +180,12 @@ def profile():
     
     return render_template('admin/profile.html')
 
+@app.route('/post/<int:post_id>')
+@login_required
+def public_view_post(post_id):
+    post = Post.query.filter_by(id=post_id, status='published').first_or_404()
+    return render_template('post.html', post=post)
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
