@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} - CMS{% endblock %}
+
+{% block content_header %}
+<div class="row mb-2">
+    <div class="col-sm-6">
+        <h1 class="m-0">View Post</h1>
+    </div>
+    <div class="col-sm-6">
+        <div class="float-sm-right">
+            <a href="{{ url_for('edit_post', post_id=post.id) }}" class="btn btn-info">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-default">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{ post.title }}</h3>
+                <div class="card-tools">
+                    <span class="badge badge-{{ 'success' if post.status == 'published' else 'warning' }}">
+                        {{ post.status }}
+                    </span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="post-meta mb-3">
+                    <small class="text-muted">
+                        <i class="far fa-user"></i> {{ post.author.username }} |
+                        <i class="far fa-clock"></i> Created: {{ post.created_at.strftime('%Y-%m-%d %H:%M') }} |
+                        <i class="fas fa-sync"></i> Updated: {{ post.updated_at.strftime('%Y-%m-%d %H:%M') }}
+                    </small>
+                </div>
+                <div class="post-content">
+                    {{ post.content|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

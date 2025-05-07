@@ -67,6 +67,31 @@
                             <p>New Post</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('profile') }}" class="nav-link">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>Profile</p>
+                        </a>
+                    </li>
+                    <li class="nav-header">POST MANAGEMENT</li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('admin_dashboard') }}" class="nav-link">
+                            <i class="nav-icon fas fa-list"></i>
+                            <p>All Posts</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('admin_dashboard') }}?status=published" class="nav-link">
+                            <i class="nav-icon fas fa-check-circle"></i>
+                            <p>Published</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('admin_dashboard') }}?status=draft" class="nav-link">
+                            <i class="nav-icon fas fa-clock"></i>
+                            <p>Drafts</p>
+                        </a>
+                    </li>
                     {% endif %}
                 </ul>
             </nav>
