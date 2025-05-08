@@ -7,16 +7,6 @@
     <div class="col-sm-6">
         <h1 class="m-0">Dashboard</h1>
     </div>
-    <div class="col-sm-6">
-        <div class="float-sm-right">
-            <a href="{{ url_for('profile') }}" class="btn btn-info mr-2">
-                <i class="fas fa-user"></i> Profile
-            </a>
-            <a href="{{ url_for('new_post') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> New Post
-            </a>
-        </div>
-    </div>
 </div>
 {% endblock %}
 
@@ -26,6 +16,11 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">All Posts</h3>
+                <div class="card-tools">
+                    <a href="{{ url_for('new_post') }}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> New Post
+                    </a>
+                </div>
             </div>
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">

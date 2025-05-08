@@ -22,12 +22,13 @@
 
         .main-sidebar {
             position: fixed;
-            top: 57px; /* Start after navbar */
+            top: 0;
             left: 0;
             width: 250px;
-            height: calc(100vh - 57px); /* penuh layar, dikurangi header */
+            height: 100vh;
             z-index: 1000;
             background-color: #343a40;
+            overflow-y: auto;
         }
 
         .sidebar {
@@ -48,13 +49,17 @@
             min-height: 100vh;
             position: relative;
             background-color: #f4f6f9;
+            animation: fadeIn 0.5s ease-in-out;
         }
 
         .main-header {
+            position: sticky;
+            top: 0;
+            z-index: 1001;
         }
 
         .content {
-            padding-top: 57px;
+            padding-top: 20px;
         }
         .nav-sidebar .nav-item {
             width: 100%;
@@ -107,6 +112,7 @@
         }
         .sidebar-menu-scroll {
             overflow-y: auto;
+            overflow-x: hidden;
             max-height: calc(100vh - 57px); /* 57px = tinggi brand-link/header */
         }
         body {
@@ -136,6 +142,7 @@
             box-shadow: 0 4px 24px rgba(99,102,241,0.08), 0 1.5px 4px rgba(0,0,0,0.03);
             border: none;
             transition: box-shadow 0.3s;
+            animation: slideIn 0.5s ease-in-out;
         }
         .card:hover {
             box-shadow: 0 8px 32px rgba(99,102,241,0.13), 0 2px 8px rgba(0,0,0,0.04);
@@ -220,8 +227,257 @@
             color: #fff;
         }
         .content-header {
-            padding-top: 0;
-            padding-bottom: 0;
+            padding-top: 32px;
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+            background: linear-gradient(90deg, #6366f1 0%, #0ea5e9 100%);
+            color: #fff !important;
+            box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+            border-bottom: none;
+        }
+        .content-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #6366f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4f46e5;
+        }
+
+        /* Dark Mode Styles */
+        [data-theme="dark"] {
+            background: #1a1a1a;
+            color: #fff;
+        }
+        [data-theme="dark"] .card {
+            background: #2d2d2d;
+            color: #fff;
+        }
+        [data-theme="dark"] .content-wrapper {
+            background: #1a1a1a;
+        }
+        [data-theme="dark"] .form-control {
+            background: #2d2d2d;
+            border-color: #404040;
+            color: #fff;
+        }
+
+        /* Enhanced Card Design */
+        .card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            border-bottom: none;
+            padding: 1.5rem;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Enhanced Button Styles */
+        .btn {
+            border-radius: 8px;
+            padding: 0.5rem 1.2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #6366f1, #4f46e5);
+            border: none;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #4f46e5, #4338ca);
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        .toast {
+            background: #fff;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #6366f1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: transparent;
+            padding: 0.5rem 0;
+            margin-bottom: 1rem;
+        }
+        .breadcrumb-item + .breadcrumb-item::before {
+            content: "›";
+        }
+
+        /* Search Bar */
+        .search-bar {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .search-bar input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+        }
+        .search-bar i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6366f1;
+        }
+
+        /* Dark Mode Toggle Styles */
+        .theme-switch-wrapper {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .theme-switch {
+            display: inline-block;
+            height: 34px;
+            position: relative;
+            width: 60px;
+        }
+
+        .theme-switch input {
+            display: none;
+        }
+
+        .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            background-color: #fff;
+            bottom: 4px;
+            content: "";
+            height: 26px;
+            left: 4px;
+            position: absolute;
+            transition: .4s;
+            width: 26px;
+            border-radius: 50%;
+        }
+
+        .slider:after {
+            content: "🌙";
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            transition: .4s;
+            opacity: 0;
+        }
+
+        input:checked + .slider {
+            background: linear-gradient(45deg, #6366f1, #4f46e5);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        input:checked + .slider:after {
+            content: "☀️";
+            left: 8px;
+            right: auto;
+            opacity: 1;
+        }
+
+        .slider:before {
+            content: "☀️";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            opacity: 1;
+        }
+
+        input:checked + .slider:before {
+            content: "🌙";
+            opacity: 0;
         }
     </style>
     {% block extra_css %}{% endblock %}
@@ -286,6 +542,13 @@
                             </a>
                         </li>
                         {% endif %}
+                        {% if current_user.is_authenticated %}
+                        <li class="nav-item mt-2">
+                            <a href="{{ url_for('logout') }}" class="btn btn-danger btn-block">
+                                <i class="fas fa-sign-out-alt"></i> Sign Out
+                            </a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </nav>
             </div>
@@ -325,7 +588,7 @@
         <div class="float-right d-none d-sm-block">
             <b>Version</b> 1.0.0
         </div>
-        <strong>Copyright &copy; 2024</strong>
+        <strong>Copyright &copy; 2025</strong>
     </footer>
 </div>
 
@@ -338,6 +601,73 @@
 <script>
     // Hapus seluruh script Sidebar hover effect
     // Sidebar akan muncul hanya jika tombol garis 3 diklik (default AdminLTE pushmenu)
+</script>
+
+<!-- Dark Mode Toggle -->
+<div class="theme-switch-wrapper">
+    <label class="theme-switch">
+        <input type="checkbox" id="checkbox" />
+        <div class="slider"></div>
+    </label>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container"></div>
+
+<!-- Loading Overlay -->
+<div class="loading" style="display: none;">
+    <div class="loading-spinner"></div>
+</div>
+
+<script>
+    // Dark Mode Toggle
+    const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme) {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        if (currentTheme === 'dark') {
+            toggleSwitch.checked = true;
+        }
+    }
+
+    function switchTheme(e) {
+        if (e.target.checked) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+        }    
+    }
+
+    toggleSwitch.addEventListener('change', switchTheme, false);
+
+    // Toast Notification
+    function showToast(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.textContent = message;
+        document.querySelector('.toast-container').appendChild(toast);
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    }
+
+    // Loading Animation
+    function showLoading() {
+        document.querySelector('.loading').style.display = 'flex';
+    }
+
+    function hideLoading() {
+        document.querySelector('.loading').style.display = 'none';
+    }
+
+    // Page Transition
+    document.addEventListener('DOMContentLoaded', () => {
+        document.body.classList.add('loaded');
+    });
 </script>
 {% block extra_js %}{% endblock %}
 </body>
